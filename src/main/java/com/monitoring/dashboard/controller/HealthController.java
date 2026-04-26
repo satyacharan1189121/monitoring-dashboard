@@ -1,15 +1,19 @@
-package com.monitoring.dashboard.controller;
+package com.monitoring.dashboard;
 
-import java.util.Map;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+@SpringBootApplication(
+    exclude = {
+        DataSourceAutoConfiguration.class,
+        HibernateJpaAutoConfiguration.class
+    }
+)
+public class MonitoringDashboardApplication {
 
-@RestController
-public class HealthController {
-
-    @GetMapping("/health")
-    public Map<String, String> health() {
-        return Map.of("status", "UP");
+    public static void main(String[] args) {
+        SpringApplication.run(MonitoringDashboardApplication.class, args);
     }
 }
